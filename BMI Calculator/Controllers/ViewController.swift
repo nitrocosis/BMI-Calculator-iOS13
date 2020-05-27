@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func heightSliderChanged(_ sender: UISlider) {
-        let heightValue = (NSString(format:"%.2f", sender.value)) as String
+        let heightValue = (String(format:"%.2f", sender.value)) as String
         
         heightLabel.text = "\(heightValue)m"
     }
@@ -37,9 +37,14 @@ class ViewController: UIViewController {
         let height = heightSlider.value
         let weight = weightSlider.value
         
-        let BMI = weight / (height * height)
+        let bmi = weight / pow(height, 2)
         
-        print(NSString(format: "%.2f", BMI))
+        print(String(format: "%.2f", bmi))
+        
+        let secondVC = SecondViewController()
+        secondVC.bmiValue = String(format: "%.1f", bmi)
+        
+        self.present(secondVC, animated: true, completion: nil)
     }
     
 }
